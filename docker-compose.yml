@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  app:
+    image: discordpy:0.1
+    volumes:
+      - .:/src
+    entrypoint: "/bin/sh -c 'python3 /src/discordbot.py'"
+      
