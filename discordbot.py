@@ -9,7 +9,7 @@ guild = discord.Guild
 
 # Values from env
 token = getenv('DISCORD_BOT_TOKEN')
-botName = getenv('DISCORD_BOT_TOKEN')
+botName = getenv('BOT_NAME')
 adminIds = getenv('ADMIN_IDS')
 target_channels = getenv('TARGET_CHANNEL_IDS')
 autoMuteUsName = "AutoMuteUs"
