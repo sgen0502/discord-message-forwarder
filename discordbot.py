@@ -17,9 +17,9 @@ autoMuteUsName = "AutoMuteUs"
 
 # DEBUG VALUES
 # botName = "LPE - 戦績BOT"
-# autoMuteUsName = "AutoMuteUs"
 # adminIds = "764399156050919465, 766830246917046283, 779988796388671529"
 # target_channels = "835968913513644042"
+# stat_permitted_channels = "835945734229721168"
 
 
 def admin_ids_to_mention(input_ids):
@@ -46,8 +46,7 @@ async def my_stats(ctx):
 
 @bot.event
 async def on_message(message):
-    if ('.au st' in message.content and message.author.name != botName) \
-            or str(message.channel.id) not in stat_permitted_channels:
+    if ('.au st' in message.content and message.author.name != botName) and str(message.channel.id) not in stat_permitted_channels:
         await message.delete()
 
         mention = admin_ids_to_mention(adminIds)
