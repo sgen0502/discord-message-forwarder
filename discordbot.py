@@ -40,18 +40,24 @@ async def ping(ctx):
 
 @bot.command()
 async def my_stats(ctx):
-    await ctx.send(f"{ctx.author.mention}が戦績の申請をしました。")
-    await ctx.send(f'.au stats {ctx.author.mention}')
+    if str(ctx.channel.id) in target_channels:
+        await ctx.send(f"{ctx.author.mention}が戦績の申請をしました。")
+        await ctx.send(f'.au stats {ctx.author.mention}')
+    else:
+        await ctx.send(f'ここじゃ使えないよ(´・ω・｀)')
 
 
 @bot.event
 async def on_message(message):
-    if ('.au st' in message.content and message.author.name != botName) and str(message.channel.id) not in stat_permitted_channels:
+    if '.au st' in message.content \
+            and message.author.name != botName \
+            and str(message.channel.id) not in stat_permitted_channels:
         await message.delete()
 
         mention = admin_ids_to_mention(adminIds)
         await message.channel.send(f"{message.author.mention} /my_stats以外での無許可な戦績確認は禁止されています。 この行為は運営へMentionされます。 {mention}")
-    elif str(message.channel.id) in target_channels and message.author.name == autoMuteUsName:
+    elif str(message.channel.id) in target_channels \
+            and message.author.name == autoMuteUsName:
         try:
             await message.delete()
             player_id = re.sub(r'^[\s\S]*?<@\!(\w+)>[\s\S]*?$', r'\1', message.embeds[0].description)
