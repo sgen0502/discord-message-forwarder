@@ -12,6 +12,7 @@ token = getenv('DISCORD_BOT_TOKEN')
 botName = getenv('BOT_NAME')
 adminIds = getenv('ADMIN_IDS')
 target_channels = getenv('TARGET_CHANNEL_IDS')
+stat_permitted_channels = getenv('STAT_PERMITTED_CHANNELS')
 autoMuteUsName = "AutoMuteUs"
 
 # DEBUG VALUES
@@ -45,7 +46,8 @@ async def my_stats(ctx):
 
 @bot.event
 async def on_message(message):
-    if '.au st' in message.content and message.author.name != botName:
+    if ('.au st' in message.content and message.author.name != botName) \
+            or str(message.channel.id) not in stat_permitted_channels:
         await message.delete()
 
         mention = admin_ids_to_mention(adminIds)
