@@ -66,7 +66,9 @@ async def on_message(message):
             await channel.send(embed=message.embeds[0])
             await message.channel.send(f"{user.mention}のDMへ戦績が送られました。")
         except:
-            await message.channel.send("戦績を取得中にエラーが発生しました。問題が続くようならNonaNekoに連絡してください。")
+            await message.channel.send("戦績を取得又は送信中にエラーが発生しました。\n" +
+                                       "Discord設定の`ブライバシー・設定 →　サーバーにいるメンバーからのDMを許可する`が有効にされているか確認してください。\n" +
+                                       "もし問題が続くようならNonaNekoに連絡してください。")
     else:
         await bot.process_commands(message)
 
